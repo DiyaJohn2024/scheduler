@@ -1,0 +1,397 @@
+* {
+  box-sizing: border-box;
+}
+
+.homepage {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  padding: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+  max-width: 100%;
+}
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--btn-color);        /* full solid color */
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  filter: brightness(1.05);
+}
+
+/* active = same color, just underline 
+.filter-btn.active {
+  transform: translateY(-2px);
+}*/
+
+.filter-label {
+  transition: all 0.3s ease;
+}
+
+
+.filter-btn.active {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25); /* slightly bigger shadow for active */
+}
+
+.filter-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 3px;
+  border-radius: 999px;
+  background: #fff; /* white underline */
+}
+
+
+@keyframes underlineExpand {
+  from { width: 0; }
+  to { width: 80%; }
+}
+
+/* Calendar container */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.tile-dots {
+  display: flex;
+  gap: 0.18rem;      /* space between dots */
+  margin-top: 0.1rem;
+}
+
+.tile-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1.8rem;
+  font-family: inherit;
+}
+/* FORCE 7 columns — fix 6-day row bug */
+.react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 0.2rem;
+}
+
+/* Force 7 columns */
+.react-calendar__month-view__days__day--neighboringMonth {
+  visibility: hidden;
+}
+
+.react-calendar__tile {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;   /* column layout */
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.35rem;                         /* space between date & dots */
+  height: 72px !important;
+  min-height: 72px !important;
+  padding-top: 0.6rem !important;
+  padding-bottom: 0.4rem !important;
+  border-radius: 14px !important;
+  border: 2px solid transparent !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  color: #2d3748 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  line-height: 1.1 !important;
+  cursor: pointer;
+  margin: 0 !important;
+  padding: 0.6rem 0.3rem !important;
+}
+
+
+.react-calendar__tile:hover {
+  transform: translateY(-5px) scale(1.02) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18) !important;
+  z-index: 10 !important;
+  border-color: rgba(255,255,255,0.8) !important;
+}
+
+.react-calendar__tile--active,
+.react-calendar__tile--hasActive {
+  background: rgba(255, 255, 255, 0.9) !important; /* light neutral */
+  border-color: #4c6fff !important;                 /* optional highlight border */
+  box-shadow: 0 0 0 2px rgba(76, 111, 255, 0.35) !important;
+  color: #111827 !important;                        /* dark text */
+}
+
+.react-calendar__tile--now {
+  background: linear-gradient(
+    135deg,
+    rgba(72, 187, 120, 0.25),
+    rgba(56, 161, 105, 0.15)
+  ) !important;
+
+  color: #065f46 !important; /* dark green text */
+  border: 2px solid rgba(72, 187, 120, 0.4) !important;
+
+  animation: glow 2s ease-in-out infinite alternate !important;
+}
+
+
+/* Colored circles for events */
+.tile-events {
+  position: absolute;
+  bottom: 0.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.2rem;
+}
+
+.event-circle {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  display: block !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.event-circle:hover {
+  transform: scale(1.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.more-badge {
+  font-size: 0.65rem !important;
+  padding: 0.15rem 0.3rem !important;
+  border-radius: 8px !important;
+  background: rgba(0,0,0,0.7) !important;
+  color: white !important;
+  font-weight: 700 !important;
+  margin-left: 0.3rem;
+}
+
+/* Modal event circle */
+.event-circle-small {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Animations */
+@keyframes glow {
+  from { box-shadow: 0 0 10px rgba(72, 187, 120, 0.5); }
+  to { box-shadow: 0 0 20px rgba(72, 187, 120, 0.8); }
+}
+
+/* Modal styles (same) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1f2937;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.modal-body {
+  padding: 0 2rem 2rem;
+}
+
+.event-item {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  background: #f8fafc;
+  border-left: 4px solid;
+  transition: all 0.2s ease;
+}
+
+.event-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.event-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.event-time {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.event-type {
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-left: 0.75rem;
+}
+
+.event-venue {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.loading, .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 1.2rem;
+  color: #6b7280;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .homepage {
+    padding: 1rem;
+  }
+  
+  .calendar-container {
+    padding: 0.5rem;
+  }
+  
+  .react-calendar__tile {
+    height: 62px !important;
+    min-height: 62px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .filter-bar {
+    gap: 0.75rem;
+  }
+  
+  .filter-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .color-dot {
+    width: 10px;
+    height: 10px;
+  }
+}

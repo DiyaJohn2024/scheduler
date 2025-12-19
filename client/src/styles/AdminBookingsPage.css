@@ -1,0 +1,189 @@
+.admin-page {
+  width: 100%;
+  max-width: none;
+  margin: 1.75rem 0 2.5rem;
+  padding: 0 2rem;
+}
+
+.admin-header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.admin-header p {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.admin-alert {
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.admin-alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.admin-empty {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+/* List + cards */
+.booking-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.booking-card {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr);
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 25px rgba(202, 138, 4, 0.18);
+}
+
+.booking-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.booking-title {
+  font-size: 1rem;
+  font-weight: 650;
+  color: #1f2937;
+}
+
+.booking-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-club {
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+.badge-time {
+  background: #fef3c7;
+  color: #92400e;
+}
+.booking-row {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  margin-top: 0.1rem;
+}
+
+.booking-row .label {
+  min-width: 110px;
+  color: #6b7280;
+}
+
+.booking-row .value {
+  color: #111827;
+}
+
+/* Right side: actions */
+.booking-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.45rem;
+}
+
+.venue-label {
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.venue-select {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 0.85rem;
+  background: #ffffff;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.venue-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+/* Buttons */
+.btn {
+  flex: 1;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.btn-approve {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ecfdf3;
+  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.45);
+}
+
+.btn-approve:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(22, 163, 74, 0.55);
+  filter: brightness(1.03);
+}
+
+.btn-reject {
+  background: #fee2e2;
+  color: #b91c1c;
+  box-shadow: 0 4px 10px rgba(248, 113, 113, 0.4);
+}
+
+.btn-reject:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(248, 113, 113, 0.55);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-card {
+    grid-template-columns: 1fr;
+  }
+}
