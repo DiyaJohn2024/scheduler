@@ -15,12 +15,13 @@ function CreateEventPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [type, setType] = useState('technical');
-  const [date, setDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [clubOrDept, setClubOrDept] = useState('');
   const [statusMsg, setStatusMsg] = useState('');
   const [error, setError] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,18 +29,14 @@ function CreateEventPage() {
     setError('');
 
     try {
-      // combine date + time into ISO strings
-      const start = new Date(`${date}T${startTime}:00`);
-      const end = new Date(`${date}T${endTime}:00`);
+      const start = new Date(`${startDate}T${startTime}:00`);
+      const end   = new Date(`${endDate}T${endTime}:00`);
 
-      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-        setError('Please provide valid date and time.');
+      if (isNaN(start.getTime()) || isNaN(end.getTime()) || end <= start) {
+        setError('Please provide a valid start/end date and time.');
         return;
       }
-      if (end <= start) {
-        setError('End time must be after start time.');
-        return;
-      }
+
 
       await createEvent({
         title,
@@ -53,7 +50,8 @@ function CreateEventPage() {
       setStatusMsg('Event created successfully!');
       setTitle('');
       setDescription('');
-      setDate('');
+      setStartDate('');
+      setEndDate('');
       setStartTime('');
       setEndTime('');
       setClubOrDept('');
@@ -105,37 +103,48 @@ function CreateEventPage() {
         </div>
 
         <div className="time-row">
-          <div className="form-group">
-            <label>Date</label>
-            <input 
-              className="form-input"
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label>Start time</label>
-            <input 
-              className="form-input"
-              type="time"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label>End time</label>
-            <input 
-              className="form-input"
-              type="time"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              required 
-            />
-          </div>
-        </div>
+  <div className="form-group">
+    <label>Start date</label>
+    <input
+      className="form-input"
+      type="date"
+      value={startDate}
+      onChange={(e) => setStartDate(e.target.value)}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label>End date</label>
+    <input
+      className="form-input"
+      type="date"
+      value={endDate}
+      onChange={(e) => setEndDate(e.target.value)}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label>Start time</label>
+    <input
+      className="form-input"
+      type="time"
+      value={startTime}
+      onChange={(e) => setStartTime(e.target.value)}
+      required
+    />
+  </div>
+  <div className="form-group">
+    <label>End time</label>
+    <input
+      className="form-input"
+      type="time"
+      value={endTime}
+      onChange={(e) => setEndTime(e.target.value)}
+      required
+    />
+  </div>
+</div>
+
 
         <div className="form-group">
           <label>Club / Department</label>

@@ -1,3 +1,16 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Or minimum: */
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /* App shell */
 .app-shell {
   position: sticky;
@@ -24,11 +37,12 @@
 }
 
 .app-shell,
-.app-main {
-  width: 95vw;
-  max-width: 1600px;
+.app-main,
+.nav-root,
+.page-container {
+  width: 100%;      /* or 98vw */
+  max-width: 1900px; /* bump this up instead of removing it */
 }
-
 
 
 /* Glass navbar – darker so light text pops */

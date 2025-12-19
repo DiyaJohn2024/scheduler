@@ -1,5 +1,6 @@
 // src/pages/RegisterPage.jsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../api/authApi';
 import '../styles/LoginPage.css';   // reuse the same CSS file
 
@@ -11,6 +12,7 @@ function RegisterPage() {
   const [role, setRole] = useState('student');
   const [msg, setMsg] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ function RegisterPage() {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       setMsg(`Registered & logged in as ${data.user.name} (${data.user.role})`);
+      navigate('/');
     } catch {
       setError('Registration failed (maybe email already used).');
     }

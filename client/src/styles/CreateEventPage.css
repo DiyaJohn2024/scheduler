@@ -127,6 +127,17 @@
   transform: translateY(-2px);
   box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
 }
+/* keep the glassy field, but text should be darker */
+.form-select {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111827;             /* dark text */
+}
+
+/* style the opened dropdown options */
+.form-select option {
+  background-color: #ffffff;  /* solid white panel */
+  color: #111827;             /* dark text */
+}
 
 @media (max-width: 768px) {
   .time-row {

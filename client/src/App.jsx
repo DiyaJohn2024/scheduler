@@ -10,6 +10,8 @@ import AdminBookingsPage from './pages/AdminBookingsPage';
 import { getCurrentUser, logout } from './auth';
 import RegisterPage from './pages/RegisterPage';
 import { createRoot } from 'react-dom/client';
+import AdminVenuesPage from './pages/AdminVenuesPage';
+
 import './App.css';
 
 function NavBar() {
@@ -80,15 +82,27 @@ function NavBar() {
           )}
 
           {user && user.role === 'admin' && (
-            <NavLink
-              to="/admin/bookings"
-              className={({ isActive }) =>
-                'nav-link ' + (isActive ? 'nav-link-active' : '')
-              }
-            >
-              Admin Bookings
-            </NavLink>
-          )}
+  <>
+    <NavLink
+      to="/admin/bookings"
+      className={({ isActive }) =>
+        'nav-link ' + (isActive ? 'nav-link-active' : '')
+      }
+    >
+      Admin Bookings
+    </NavLink>
+
+    <NavLink
+      to="/admin/venues"
+      className={({ isActive }) =>
+        'nav-link ' + (isActive ? 'nav-link-active' : '')
+      }
+    >
+      Admin Venues
+    </NavLink>
+  </>
+)}
+
         </div>
 
         <div className="nav-right">
@@ -141,6 +155,7 @@ function App() {
           <Route path="/bookings/request" element={<RequestBookingPage />} />
           <Route path="/bookings/mine" element={<MyBookingsPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/admin/venues" element={<AdminVenuesPage />} />
           <Route path="/admin/bookings" element={<AdminBookingsPage />} />
         </Routes>
       </main>
