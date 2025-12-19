@@ -112,6 +112,57 @@
   color: #92400e;
 }
 
+/* Button row under each event */
+.my-events-actions {
+  margin-top: 0.4rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Base button */
+.my-events-btn {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease,
+              box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.my-events-btn:hover {
+  background: rgba(30, 64, 175, 0.9);
+  border-color: #93c5fd;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
+  transform: translateY(-1px);
+}
+
+/* Primary (update) */
+.my-events-btn--primary {
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  border-color: transparent;
+  color: #f9fafb;
+}
+
+.my-events-btn--primary:hover {
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.7);
+}
+
+/* Danger (delete) */
+.my-events-btn--danger {
+  background: rgba(248, 113, 113, 0.18);
+  border-color: rgba(248, 113, 113, 0.7);
+  color: #fecaca;
+}
+
+.my-events-btn--danger:hover {
+  background: rgba(239, 68, 68, 0.35);
+  box-shadow: 0 8px 22px rgba(239, 68, 68, 0.55);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .my-events-card {

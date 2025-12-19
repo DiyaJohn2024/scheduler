@@ -10,6 +10,7 @@ import AdminBookingsPage from './pages/AdminBookingsPage';
 import AdminVenuesPage from './pages/AdminVenuesPage';
 import RegisterPage from './pages/RegisterPage';
 import { getCurrentUser, logout } from './auth';
+import EditEventPage from './pages/EditEventPage';
 
 import './App.css';
 
@@ -152,6 +153,7 @@ function App() {
           <Route path="/bookings/request" element={<RequestBookingPage />} />
           <Route path="/bookings/mine" element={<MyBookingsPage />} />
           <Route path="/admin/venues" element={<AdminVenuesPage />} />
+          <Route path="/events/:id/edit" element={<EditEventPage />} />
           <Route path="/admin/bookings" element={<AdminBookingsPage />} />
         </Routes>
       </main>

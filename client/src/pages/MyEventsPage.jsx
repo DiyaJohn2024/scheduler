@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { fetchMyEvents } from '../api/eventsApi';
+import { deleteEvent, fetchMyEvents } from '../api/eventsApi';
+import { useNavigate } from 'react-router-dom';
 import '../styles/MyEventsPage.css';
 
 function MyEventsPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const load = async () => {
@@ -25,10 +27,18 @@ function MyEventsPage() {
   }, []);
 
   if (loading)
-    return <div className="my-events-page"><div className="my-events-loading">Loading your events...</div></div>;
+    return (
+      <div className="my-events-page">
+        <div className="my-events-loading">Loading your events...</div>
+      </div>
+    );
 
   if (error)
-    return <div className="my-events-page"><div className="my-events-error">{error}</div></div>;
+    return (
+      <div className="my-events-page">
+        <div className="my-events-error">{error}</div>
+      </div>
+    );
 
   return (
     <div className="my-events-page">
@@ -65,10 +75,33 @@ function MyEventsPage() {
                       Venue: {ev.confirmedVenue.name}
                     </span>
                   ) : (
-                    <span className="chip chip-pending">
-                      Venue not allocated
-                    </span>
+                    <span className="chip chip-pending">Venue not allocated</span>
                   )}
+                </div>
+
+                <div className="my-events-actions">
+                  {/* Navigate to edit page */}
+                  <button
+                    className="my-events-btn my-events-btn--primary"
+                    onClick={() => navigate(`/events/${ev._id}/edit`)}
+                  >
+                    Update
+                  </button>
+
+                  <button
+                    className="my-events-btn my-events-btn--danger"
+                    onClick={async () => {
+                      if (!window.confirm('Delete this event?')) return;
+                      try {
+                        await deleteEvent(ev._id);
+                        window.location.reload();
+                      } catch (err) {
+                        console.error('Failed to delete event', err);
+                      }
+                    }}
+                  >
+                    Delete
+                  </button>
                 </div>
               </li>
             ))}
